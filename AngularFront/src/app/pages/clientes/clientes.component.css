@@ -1,0 +1,25 @@
+.container-principal{
+    margin-top: 30px;
+}
+
+.tabla-temporadas{
+    overflow-y: scroll;
+}
+
+.row{
+    margin-top: 20px;
+}
+
+.tabla-productos{
+    height: 35vh;
+    overflow-y: scroll;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.check-productos{
+    height: 30vh;
+    overflow-y: scroll;
+}

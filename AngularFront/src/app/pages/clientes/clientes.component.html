@@ -1,0 +1,197 @@
+<div class="container container-principal">
+  <!-- Inicio Temporadas -->
+  <div class="row">
+    <H3>Temporadas</H3>
+    <div class="col">
+      <h5>Crear Temporada</h5>
+      <!-- Incio formulario crear temporada -->
+      <form
+        (ngSubmit)="crearTemporada()"
+        [formGroup]="temporadaForm"
+      >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Fecha Inicio</label>
+          <input type="date" class="form-control" id="exampleInputPassword1" formControlName="fechaInicio">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword2" class="form-label">Fecha Fin</label>
+          <input type="date" class="form-control" id="exampleInputPassword2" formControlName="fechaFin">
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Temporada</button>
+      </form>
+      <!-- FIn formulario Crear temporada -->
+    </div>
+    <div class="col">
+      <h5>Lista de Temporadas</h5>
+      <table class="table tabla-temporadas">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Mes Inicio</th>
+            <th scope="col">Mes Fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let temporada of listaTemporadas ">
+            <td>{{temporada.nombre}}</td>
+            <td>{{temporada.mesInicio}}</td>
+            <td>{{temporada.mesFin}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Fin Temporadas -->
+  <!-- Inicio Productos -->
+
+  <div class="row">
+    <h3>Productos</h3>
+    <div class="row">
+      <div class="col">
+        <h5>Crear Producto</h5>
+        <!-- Inicio Formulario crear Producto -->
+        <form
+        (ngSubmit)="crearProducto()"
+        [formGroup]="crearProductoForm"
+      >
+        <div class="mb-3">
+          <label for="exampleInputEmail2" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword3" class="form-label">Descripcion</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="descripcion">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword4" class="form-label">Precio</label>
+          <input type="number" min="0.01"  class="form-control" id="exampleInputPassword2" formControlName="precio">
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Producto</button>
+      </form>
+      <!-- Fin formulario Crear Producto -->
+      </div>
+      <div class="col">
+        <h5>Añadir o actualizar precio del producto</h5>
+        <form
+        (ngSubmit)=" actualizarPrecioProducto()"
+        [formGroup]="actualizarProductoForm"
+      >
+        <div class="mb-3">
+          <label for="ptp1" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="ptp1" formControlName="nombre">
+        </div>
+        <div class="mb-3">
+          <label for="ptp2" class="form-label">Descripcion</label>
+          <input type="text" class="form-control" id="ptp2" formControlName="descripcion">
+        </div>
+        <div class="mb-3">
+          <label  id="temporada-1-1" class="form-label">Temporada</label>
+          <select id="temporada-1-1" formControlName="temporada">
+            <option 
+            *ngFor="let temp of listaTemporadas" 
+            [value]="temp.id_temporada"
+          >{{temp.nombre}}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="ptp3" class="form-label">Precio</label>
+          <input type="number" class="form-control" id="ptp3" formControlName="precio">
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Precio Producto</button>
+      </form>
+      </div>
+    </div>
+    <div class="row">
+      <h5>Tabla de productos</h5>
+      <h6>Escoger Temporada</h6>
+      <select #Products (change)="caragarProductosPlatos(Products.value)">
+        <option 
+        *ngFor="let temp of listaTemporadas" 
+        [value]="temp.id_temporada"
+        >{{temp.nombre}}</option>
+      </select>
+      <table class="table tabla-productos">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of listaProductos ">
+            <td>{{producto.Producto.nombre}}</td>
+            <td>{{producto.Producto.descripcion}}</td>
+            <td>{{producto.precio}}</td>
+            <td>
+              <a  
+              (click)="actualizarFormUpdateProducto(producto.Producto.id_producto,producto.precio,producto.Producto.nombre,producto.Producto.descripcion)"
+              data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-pencil cursor" ></i> </a>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Fin productos -->
+
+  <!-- Inicio Plato -->
+  <div class="row">
+    <h3>Platos</h3>
+    <div class="row">
+      <h5>Crear Plato</h5>
+      <form class="row gy-2 gx-3 align-items-center"
+        (ngSubmit)="crearPlato()"
+        [formGroup]="crearPlatoForm">
+        <div class="col">
+          <h6>Información General</h6>
+          <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+          <input type="text" class="form-control" placeholder="Descricion" formControlName="descripcion">
+        </div>
+        <div class="col">
+          <h6>Productos</h6>
+          <div class="form-check check-productos">
+            <div *ngFor="let prod of listaProductos">
+              <input class="form-check-input" type="checkbox" value="" (click)="agregarOeliminarProductoPlato(prod.Producto.id_producto)">
+              <label class="form-check-label">
+                {{prod.Producto.nombre}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Plato</button>
+      </form>
+    </div>
+    <div class="row">
+      <h5>Lista de platos</h5>
+    </div>
+    <table class="table tabla-productos">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Precio</th>
+          <!-- <th scope="col">Editar</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plato of listaPlatos ">
+          <td>{{plato.Plato.nombre}}</td>
+          <td>{{plato.Plato.descripcion}}</td>
+          <td>{{plato.precio}}</td>
+          <!-- <td>
+            <a  
+            (click)="actualizarFormUpdateProducto(producto.Producto.id_producto,producto.precio,producto.Producto.nombre,producto.Producto.descripcion)"
+            data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-pencil cursor" ></i> </a>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
