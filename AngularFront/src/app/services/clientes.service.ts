@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../models/cliente.model';
 import { tap,map } from 'rxjs/operators';
 
-const URL_Base = 'http://localhost:3000/api'
+const URL_Base = 'https://backendcore.onrender.com/api'
 
 @Injectable({
   providedIn: 'root'

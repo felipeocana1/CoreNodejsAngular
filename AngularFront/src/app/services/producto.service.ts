@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto.model';
 
-const URL_Base = 'http://localhost:3000/api'
+const URL_Base = 'https://backendcore.onrender.com/api'
 
 @Injectable({
   providedIn: 'root'
